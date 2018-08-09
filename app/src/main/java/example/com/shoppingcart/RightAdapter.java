@@ -140,7 +140,7 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
                 tvCount.setText(String.valueOf(count));
                 int[] loc = new int[2];
                 v.getLocationInWindow(loc);
-                activity.playAnimation(loc);
+                activity.playAnimation(loc);//加号动画效果
 
             } else if (i == R.id.tvMinus) {
                 int count = activity.getSelectedItemCountById(item.id);
