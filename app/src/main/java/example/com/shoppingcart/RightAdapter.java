@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -105,12 +106,23 @@ public class RightAdapter extends BaseAdapter implements StickyListHeadersAdapte
         public void bindData(GoodsItem item) {
             this.item = item;
             name.setText(item.name);
-            Picasso.with(mContext)
-                    .load(item.img)
-                    .error(R.mipmap.ic_launcher)
-                    .fit()
-                    .centerCrop()
-                    .into(img);
+//            Picasso.with(mContext)
+////                    .load(item.img)
+//                    .load(R.mipmap.ic_launcher)
+//                    .error(R.mipmap.ic_launcher)
+//                    .fit()
+//                    .centerCrop()
+//                    .into(img);
+
+            //OSS图片好像需要访问控制
+            Glide.with(mContext)
+                    .load(item.img)//图片地址url
+                    .placeholder(R.mipmap.ic_launcher)//loading时候的Drawable
+                    .error(R.mipmap.ic_launcher)//loading失败的drawable
+//                    .animate()//设置load完的动画
+                    .centerCrop()//中心切圆, 会填满
+                    .into(img);//目标View
+
             ratingBar.setRating(item.rating);//设置当前评分
             item.count = mContext.getSelectedItemCountById(item.id);
             tvCount.setText(String.valueOf(item.count));
